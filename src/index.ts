@@ -1,5 +1,4 @@
 import { registerPlugin } from '@capacitor/core';
-
 import type { migratelocalstoragePlugin } from './definitions';
 
 const migratelocalstorage = registerPlugin<migratelocalstoragePlugin>('migratelocalstorage', {

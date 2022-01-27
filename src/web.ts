@@ -7,4 +7,12 @@ export class migratelocalstorageWeb extends WebPlugin implements migratelocalsto
     console.log('ECHO', options);
     return options;
   }
+
+  async getLocalStorageItems(): Promise<any> {
+    throw this.unimplemented('getLocalStorageItems not implemented on web.');
+  }
 }
+
+const MigrateLocalStorage = new migratelocalstorageWeb();
+
+export { MigrateLocalStorage };
