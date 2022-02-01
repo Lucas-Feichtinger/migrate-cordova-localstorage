@@ -14,10 +14,10 @@ import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 
-@CapacitorPlugin(name = "migratelocalstorage")
-public class migratelocalstoragePlugin extends Plugin {
+@CapacitorPlugin(name = "MigrateLocalStorage")
+public class MigrateLocalStoragePlugin extends Plugin {
 
-    private migratelocalstorage implementation = new migratelocalstorage();
+    private MigrateLocalStorage implementation = new MigrateLocalStorage();
 
     @PluginMethod
     public void echo(PluginCall call) {
@@ -29,10 +29,10 @@ public class migratelocalstoragePlugin extends Plugin {
     }
 
     @PluginMethod()
-    public void getLocalStorageItems(PluginCall call) throws JSONException {
+    public void getVertragswerk(PluginCall call) throws JSONException {
        Context appctx = getContext().getApplicationContext();
        JSObject ret = new JSObject();
-       ret.put("localStorage", implementation.getLocalStorageItems(appctx));
+       ret.put("vwk", implementation.getVertragswerk(appctx));
        call.resolve(ret);
     }
 }

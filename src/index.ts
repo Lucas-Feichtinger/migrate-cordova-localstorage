@@ -1,9 +1,12 @@
 import { registerPlugin } from '@capacitor/core';
-import type { migratelocalstoragePlugin } from './definitions';
+import { MigrateLocalStoragePlugin } from './definitions';
 
-const migratelocalstorage = registerPlugin<migratelocalstoragePlugin>('migratelocalstorage', {
-  web: () => import('./web').then(m => new m.migratelocalstorageWeb()),
-});
+const MigrateLocalStorage = registerPlugin<MigrateLocalStoragePlugin>(
+  'MigrateLocalStorage',
+  {
+    web: () => import('./web').then(m => new m.MigrateLocalStorageWeb()),
+  }
+);
 
 export * from './definitions';
-export { migratelocalstorage };
+export { MigrateLocalStorage };

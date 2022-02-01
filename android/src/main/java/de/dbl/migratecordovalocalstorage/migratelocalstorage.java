@@ -9,52 +9,60 @@ import java.io.File;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
-public class migratelocalstorage {
+public class MigrateLocalStorage {
+
+
     public String echo(String value) {
         Log.i("Echo", value);
         return value;
     }
 
-    public Map<String, String> getLocalStorageItems(Context context) {
-        Map<String, String> map = new HashMap<>();
+    public String getVertragswerk(Context context) {
+        //String dataDir = context.getApplicationInfo().dataDir;
+        //Log.i("dir: ", dataDir + "/app_webview/Local Storage/leveldb");
+        String localStoragePath = "/data/data/de.dbl.reparaturapp/app_webview/Default/Local Storage/leveldb";
 
-        String dataDir = context.getApplicationInfo().dataDir;
-        File localstorage = new File(dataDir + "/app_webview/Local Storage/file__0.localstorage");
+        // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+        // try to read vertragswerk from LevelDB
+        //
+        // to be done...
+        // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+        // try to read vertragswerk from *.ldb as Textfile
+        //
 
-        if (!localstorage.exists()) {
-            return map;
-        }
+        // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+        // try to read vertragswerk from *.log as Textfile
+        //
+        // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+        File storedFileLoc = new File(localStoragePath);
 
-        Cursor cursor = null;
-        SQLiteDatabase db = null;
-        try {
-            File dbfile = context.getDatabasePath(localstorage.getPath());
-            dbfile.setWritable(true);
-            db = SQLiteDatabase.openDatabase(dbfile.getAbsolutePath(), null, SQLiteDatabase.OPEN_READWRITE);
+        readVertragswerkFromTextfile(storedFileLoc);
 
-            String sql = "SELECT key,value FROM ItemTable";
-            cursor = db.rawQuery(sql, null);
-            cursor.moveToFirst();
-            while (!cursor.isAfterLast()) {
-                String key = cursor.getString(0);
-                byte[] itemByteArray = cursor.getBlob(1);
-                String value = new String(itemByteArray, Charset.forName("UTF-16LE"));
+        return "test";
+    }
 
-                map.put(key, value);
-                cursor.moveToNext();
-            }
-            return map;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return map;
-        } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
-            if (db != null) {
-                db.close();
+    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+    public String readVertragswerkFromTextfile(File folder) {
+        for (final File fileEntry : folder.listFiles()) {
+            if (fileEntry.isDirectory()) {
+                readVertragswerkFromTextfile(fileEntry);
+            } else {
+                Path fileName = Path.of(fileEntry.getName());
+
+                String content = Files.readString(fileEntry.getName());
+                System.out.println(actual);
             }
         }
     }
+
+    // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+
 }

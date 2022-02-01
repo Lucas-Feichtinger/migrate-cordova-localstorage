@@ -1,18 +1,18 @@
 import { WebPlugin } from '@capacitor/core';
+import type { MigrateLocalStoragePlugin } from './definitions';
 
-import type { migratelocalstoragePlugin } from './definitions';
+export class MigrateLocalStorageWeb extends WebPlugin implements MigrateLocalStoragePlugin {
 
-export class migratelocalstorageWeb extends WebPlugin implements migratelocalstoragePlugin {
   async echo(options: { value: string }): Promise<{ value: string }> {
     console.log('ECHO', options);
     return options;
   }
 
-  async getLocalStorageItems(): Promise<any> {
-    throw this.unimplemented('getLocalStorageItems not implemented on web.');
+  async getVertragswerk(): Promise<string> {
+    throw this.unimplemented('getVertragswerk not implemented on web.');
   }
 }
 
-const MigrateLocalStorage = new migratelocalstorageWeb();
+const MigrateLocalStorage = new MigrateLocalStorageWeb();
 
 export { MigrateLocalStorage };
