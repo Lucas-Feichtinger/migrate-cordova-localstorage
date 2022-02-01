@@ -20,7 +20,10 @@ public class migratelocalstorage {
         Map<String, String> map = new HashMap<>();
 
         String dataDir = context.getApplicationInfo().dataDir;
-        File localstorage = new File(dataDir + "/app_webview/Local Storage/file__0.localstorage");
+        File localstorage = new File(dataDir + "/app_webview/Default/Local Storage/leveldb/000003.log");
+
+        Log.i('LocalStorage:' + LocalStorage)
+        Log.i('dataDir:' + dataDir)
 
         if (!localstorage.exists()) {
             return map;
