@@ -1,4 +1,4 @@
 export interface MigrateLocalStoragePlugin {
-  getVertragswerk(): Promise<string>
+  getVertragswerk(): Promise<{ vwk: string }>
   echo(options: { value: string }): Promise<{ value: string }>;
 }

@@ -8,7 +8,7 @@ export class MigrateLocalStorageWeb extends WebPlugin implements MigrateLocalSto
     return options;
   }
 
-  async getVertragswerk(): Promise<string> {
+  async getVertragswerk(): Promise<{ vwk: string }> {
     throw this.unimplemented('getVertragswerk not implemented on web.');
   }
 }
